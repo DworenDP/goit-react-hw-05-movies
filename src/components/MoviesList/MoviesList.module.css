@@ -1,0 +1,19 @@
+.list {
+    padding-top: 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.itemLink {
+  font-size: medium;
+  text-transform: uppercase;
+  transition: color 250ms ease-in-out;
+  font-size: 20px;
+
+}
+
+.itemLink:hover,
+.itemLink:focus {
+  color: #0048ff;
+}
