@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
+import { useParams, useLocation, Link } from 'react-router-dom';
 import { getMoviesDetails } from 'servicse/getApi';
 import { MovieDetailCard } from './MovieDetailCard';
 import css from './MovieDetail.module.css';
@@ -8,7 +8,8 @@ export const MovieDetail = () => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
 
-  const navigate = useNavigate();
+  const location = useLocation();
+  const goBack = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     try {
@@ -20,13 +21,11 @@ export const MovieDetail = () => {
 
   return (
     <div className={css.cardContainer}>
-      <button
-        type="button"
-        className={css.goBackBtn}
-        onClick={() => navigate(-1)}
-      >
-        Go back
-      </button>
+      <Link to={goBack.current}>
+        <button type="button" className={css.goBackBtn}>
+          Go back
+        </button>
+      </Link>
       <MovieDetailCard movie={movieDetails} />
     </div>
   );
